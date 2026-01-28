@@ -1,0 +1,33 @@
+name: simple_bloc
+description: Generate BLoC pattern boilerplate with basic states (Initial, Loading, Loaded, Error) and fetch event
+version: 1.0.0
+repository: https://github.com/yourusername/simple_bloc_brick
+
+# Variables that will be used in templates
+vars:
+  name:
+    type: string
+    description: The feature/page name (e.g., user, product, post)
+    prompt: What is the feature name?
+
+  data_type:
+    type: string
+    description: The data type that will be loaded (e.g., List<User>, Product, Map<String, dynamic>)
+    prompt: What is the data type?
+    default: dynamic
+
+  datasource_name:
+    type: string
+    description: The datasource class name (e.g., UserDatasource, ProductRemoteDatasource)
+    prompt: What is the datasource class name?
+
+  datasource_method:
+    type: string
+    description: The method name to fetch data from datasource (e.g., getUsers, fetchProducts)
+    prompt: What is the datasource fetch method name?
+
+  use_equatable:
+    type: boolean
+    description: Whether to use Equatable for states and events
+    prompt: Use Equatable?
+    default: true
