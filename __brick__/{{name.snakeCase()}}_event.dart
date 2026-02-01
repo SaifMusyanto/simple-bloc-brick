@@ -1,3 +1,7 @@
+{{#use_equatable}}
+import 'package:equatable/equatable.dart';
+{{/use_equatable}}
+
 part of '{{name.snakeCase()}}_bloc.dart';
 
 {{#use_equatable}}

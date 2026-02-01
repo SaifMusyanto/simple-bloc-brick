@@ -1,5 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';{{#use_equatable}}
-import 'package:equatable/equatable.dart';{{/use_equatable}}
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '{{name.snakeCase()}}_event.dart';
 part '{{name.snakeCase()}}_state.dart';

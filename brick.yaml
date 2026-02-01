@@ -1,7 +1,7 @@
 name: simple_bloc
 description: Generate BLoC pattern boilerplate with basic states (Initial, Loading, Loaded, Error) and fetch event
 version: 1.0.0
-repository: https://github.com/yourusername/simple_bloc_brick
+repository: https://github.com/SaifMusyanto/simple-bloc-brick
 
 # Variables that will be used in templates
 vars:

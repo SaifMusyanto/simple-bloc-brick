@@ -13,6 +13,12 @@ A Mason brick to generate BLoC pattern boilerplate with basic states and fetch e
 
 ## Installation
 
+### Install Mason
+
+```bash
+dart pub global activate mason_cli
+```
+
 ### Globally
 
 ```bash
@@ -22,7 +28,7 @@ mason add simple_bloc
 ### Locally
 
 ```bash
-mason add simple_bloc --path path/to/simple_bloc_brick
+mason add simple_bloc --path C:\Users\ASUS\OneDrive\Documents\Exploration\simple_bloc_brick
 ```
 
 ## Usage
@@ -67,6 +73,8 @@ lib/
 ### user_state.dart
 
 ```dart
+import 'package:equatable/equatable.dart';
+
 part of 'user_bloc.dart';
 
 abstract class UserState extends Equatable {
@@ -106,6 +114,8 @@ class UserError extends UserState {
 ### user_event.dart
 
 ```dart
+import 'package:equatable/equatable.dart';
+
 part of 'user_bloc.dart';
 
 abstract class UserEvent extends Equatable {
@@ -124,7 +134,6 @@ class FetchUser extends UserEvent {
 
 ```dart
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
