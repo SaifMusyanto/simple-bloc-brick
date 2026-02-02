@@ -1,4 +1,4 @@
-# Simple BLoC
+# Nedo BLoC
 
 A Mason brick to generate BLoC pattern boilerplate with basic states and fetch event.
 
@@ -22,13 +22,13 @@ dart pub global activate mason_cli
 ### Globally
 
 ```bash
-mason add simple_bloc
+mason add nedo_bloc
 ```
 
 ### Locally
 
 ```bash
-mason add simple_bloc --path C:\Users\ASUS\OneDrive\Documents\Exploration\simple_bloc_brick
+mason add nedo_bloc --path C:\Users\ASUS\OneDrive\Documents\Exploration\simple_bloc_brick
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ mason add simple_bloc --path C:\Users\ASUS\OneDrive\Documents\Exploration\simple
 ### Generate BLoC files
 
 ```bash
-mason make simple_bloc
+mason make nedo_bloc
 ```
 
 You'll be prompted for:
@@ -50,7 +50,7 @@ You'll be prompted for:
 ### Example
 
 ```bash
-$ mason make simple_bloc
+$ mason make nedo_bloc
 
 ? What is the feature name? user
 ? What is the data type? List<User>
