@@ -1,0 +1,155 @@
+{
+  "@@locale": "id",
+  "errorCannotNull": "tidak boleh kosong",
+  "@errorCannotNull": {
+    "description": "Pesan eror ketika bidang yang wajib diisi bernilai null"
+  },
+  "errorMustBeFilled": "wajib diisi",
+  "@errorMustBeFilled": {
+    "description": "Pesan eror ketika bidang yang wajib diisi belum terisi"
+  },
+  "errorConnectTimeout": "waktu koneksi habis",
+  "@errorConnectTimeout": {
+    "description": "Pesan eror ketika koneksi mengalami time out"
+  },
+  "errorPleaseTryAgain": "silakan coba lagi",
+  "@errorPleaseTryAgain": {
+    "description": "Pesan eror umum yang meminta pengguna mencoba kembali"
+  },
+  "errorLangNotFound": "bahasa tidak ditemukan",
+  "@errorLangNotFound": {
+    "description": "Pesan eror ketika bahasa yang diminta tidak ditemukan"
+  },
+  "errorNoData": "tidak ada data untuk ditampilkan",
+  "@errorNoData": {
+    "description": "Pesan eror ketika tidak ada data yang bisa ditampilkan"
+  },
+  "errorNullResponse": "Server tidak memberikan respon",
+  "@errorNullResponse": {
+    "description": "Pesan eror ketika respons bernilai null"
+  },
+  "errorPleaseSelectImageFirst": "silakan pilih gambar terlebih dahulu",
+  "@errorPleaseSelectImageFirst": {
+    "description": "Pesan eror ketika belum ada gambar yang dipilih"
+  },
+  "errorReceiveTimeout": "waktu menerima habis",
+  "@errorReceiveTimeout": {
+    "description": "Pesan eror ketika proses penerimaan data mengalami time out"
+  },
+  "errorRequestCanceled": "permintaan dibatalkan",
+  "@errorRequestCanceled": {
+    "description": "Pesan eror ketika permintaan dibatalkan"
+  },
+  "errorRequestToServer": "gagal terhubung ke server",
+  "@errorRequestToServer": {
+    "description": "Pesan eror ketika permintaan ke server gagal"
+  },
+  "errorSendTimeout": "waktu mengirim habis",
+  "@errorSendTimeout": {
+    "description": "Pesan eror ketika pengiriman data mengalami time out"
+  },
+  "textChangePassword": "ubah kata sandi",
+  "@textChangePassword": {
+    "description": "Teks untuk mengubah kata sandi"
+  },
+  "textChangeRole": "ubah role",
+  "@textChangeRole": {
+    "description": "Teks untuk mengubah role pengguna"
+  },
+  "textLogin": "masuk",
+  "@textLogin": {
+    "description": "Teks untuk aksi masuk"
+  },
+  "textLogout": "keluar",
+  "@textLogout": {
+    "description": "Teks untuk aksi keluar"
+  },
+  "textSelectRole": "pilih role",
+  "@textSelectRole": {
+    "description": "Teks untuk memilih role pengguna"
+  },
+  "textPleaseLoginToContinue": "silakan masuk untuk melanjutkan",
+  "@textPleaseLoginToContinue": {
+    "description": "Permintaan agar pengguna masuk untuk melanjutkan"
+  },
+  "errorWrongEmailFormat": "format email salah",
+  "@errorWrongEmailFormat": {
+    "description": "Pesan eror ketika format email tidak sesuai"
+  },
+  "errorWrongNumberFormat": "format angka salah",
+  "@errorWrongNumberFormat": {
+    "description": "Pesan eror ketika format angka tidak sesuai"
+  },
+  "textCharacter": "karakter",
+  "@textCharacter": {
+    "description": "Teks yang merepresentasikan karakter"
+  },
+  "textLowerThan": "kurang dari",
+  "@textLowerThan": {
+    "description": "Teks yang menunjukkan sesuatu lebih rendah dari nilai tertentu"
+  },
+  "textMoreThan": "lebih dari",
+  "@textMoreThan": {
+    "description": "Teks yang menunjukkan sesuatu lebih dari nilai tertentu"
+  },
+  "errorPleaseSelectFileFirst": "silakan pilih berkas terlebih dahulu",
+  "@errorPleaseSelectFileFirst": {
+    "description": "Pesan eror ketika belum ada berkas yang dipilih"
+  },
+  "successDataDeleted": "data berhasil dihapus",
+  "@successDataDeleted": {
+    "description": "Pesan sukses ketika data berhasil dihapus"
+  },
+  "successDataUpdated": "data berhasil diperbarui",
+  "@successDataUpdated": {
+    "description": "Pesan sukses ketika data berhasil diperbarui"
+  },
+  "successDataInserted": "data berhasil disisipkan",
+  "@successDataInserted": {
+    "description": "Pesan sukses ketika data berhasil disisipkan"
+  },
+  "errorBadRequest": "Permintaan tidak valid, mohon periksa input Anda.",
+  "@errorBadRequest": {
+    "description": "Pesan error untuk permintaan yang tidak valid"
+  },
+  "errorUnauthorized": "Sesi Anda telah berakhir, silakan login kembali.",
+  "@errorUnauthorized": {
+    "description": "Pesan error untuk otentikasi yang tidak sah"
+  },
+  "errorForbidden": "Anda tidak memiliki akses untuk fitur ini.",
+  "@errorForbidden": {
+    "description": "Pesan error untuk akses yang terlarang"
+  },
+  "errorNotFound": "Data yang Anda cari tidak ditemukan.",
+  "@errorNotFound": {
+    "description": "Pesan error untuk data yang tidak ditemukan"
+  },
+  "errorValidation": "Beberapa data tidak valid, silakan periksa kembali input Anda.",
+  "@errorValidation": {
+    "description": "Pesan error untuk kesalahan validasi data (HTTP 422)"
+  },
+  "errorTooManyRequests": "Terlalu banyak permintaan, mohon tunggu sebentar.",
+  "@errorTooManyRequests": {
+    "description": "Pesan error untuk terlalu banyak permintaan"
+  },
+  "errorInternalServer": "Terjadi kesalahan pada sistem, silakan coba beberapa saat lagi.",
+  "@errorInternalServer": {
+    "description": "Pesan error untuk kesalahan server internal"
+  },
+  "errorBadGateway": "Sistem sedang sibuk, silakan coba lagi nanti.",
+  "@errorBadGateway": {
+    "description": "Pesan error untuk gateway yang buruk"
+  },
+  "errorMaintenance": "Layanan sedang dalam perbaikan.",
+  "@errorMaintenance": {
+    "description": "Pesan error untuk layanan yang sedang dalam perbaikan"
+  },
+  "errorGatewayTimeout": "Waktu tunggu server habis, silakan coba lagi.",
+  "@errorGatewayTimeout": {
+    "description": "Pesan error untuk waktu tunggu gateway"
+  },
+  "errorUnknown": "Terjadi kesalahan yang tidak diketahui.",
+  "@errorUnknown": {
+    "description": "Pesan error untuk kesalahan yang tidak diketahui"
+  }
+}

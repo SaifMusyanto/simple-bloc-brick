@@ -1,0 +1,155 @@
+{
+  "@@locale": "en",
+  "errorCannotNull": "cannot null",
+  "@errorCannotNull": {
+    "description": "Error message when a required field is null"
+  },
+  "errorMustBeFilled": "must be filled",
+  "@errorMustBeFilled": {
+    "description": "Error message when a required field is not filled"
+  },
+  "errorConnectTimeout": "connect timeout",
+  "@errorConnectTimeout": {
+    "description": "Error message when connection times out"
+  },
+  "errorPleaseTryAgain": "please try again",
+  "@errorPleaseTryAgain": {
+    "description": "Generic error message asking the user to try again"
+  },
+  "errorLangNotFound": "language not found",
+  "@errorLangNotFound": {
+    "description": "Error message when the specified language is not found"
+  },
+  "errorNoData": "no data can be show",
+  "@errorNoData": {
+    "description": "Error message when there is no data to display"
+  },
+  "errorNullResponse": "Server returned no data",
+  "@errorNullResponse": {
+    "description": "Error message when the response is null"
+  },
+  "errorPleaseSelectImageFirst": "please select image first",
+  "@errorPleaseSelectImageFirst": {
+    "description": "Error message when no image is selected"
+  },
+  "errorReceiveTimeout": "receive timeout",
+  "@errorReceiveTimeout": {
+    "description": "Error message when receiving data times out"
+  },
+  "errorRequestCanceled": "request canceled",
+  "@errorRequestCanceled": {
+    "description": "Error message when a request is canceled"
+  },
+  "errorRequestToServer": "request connection failed",
+  "@errorRequestToServer": {
+    "description": "Error message when a request to the server fails"
+  },
+  "errorSendTimeout": "send timeout",
+  "@errorSendTimeout": {
+    "description": "Error message when sending data times out"
+  },
+  "textChangePassword": "change password",
+  "@textChangePassword": {
+    "description": "Text for changing password"
+  },
+  "textChangeRole": "change role",
+  "@textChangeRole": {
+    "description": "Text for changing user role"
+  },
+  "textLogin": "login",
+  "@textLogin": {
+    "description": "Text for login action"
+  },
+  "textLogout": "logout",
+  "@textLogout": {
+    "description": "Text for logout action"
+  },
+  "textSelectRole": "select role",
+  "@textSelectRole": {
+    "description": "Text for selecting user role"
+  },
+  "textPleaseLoginToContinue": "please login to continue",
+  "@textPleaseLoginToContinue": {
+    "description": "Prompt asking the user to log in to continue"
+  },
+  "errorWrongEmailFormat": "wrong email format",
+  "@errorWrongEmailFormat": {
+    "description": "Error message when the email format is incorrect"
+  },
+  "errorWrongNumberFormat": "wrong number format",
+  "@errorWrongNumberFormat": {
+    "description": "Error message when the number format is incorrect"
+  },
+  "textCharacter": "character",
+  "@textCharacter": {
+    "description": "Text representing a character"
+  },
+  "textLowerThan": "lower than",
+  "@textLowerThan": {
+    "description": "Text indicating something is lower than a certain value"
+  },
+  "textMoreThan": "more than",
+  "@textMoreThan": {
+    "description": "Text indicating something is more than a certain value"
+  },
+  "errorPleaseSelectFileFirst": "please select file first",
+  "@errorPleaseSelectFileFirst": {
+    "description": "Error message when no file is selected"
+  },
+  "successDataDeleted": "data successfully deleted",
+  "@successDataDeleted": {
+    "description": "Success message when data is deleted successfully"
+  },
+  "successDataUpdated": "data successfully updated",
+  "@successDataUpdated": {
+    "description": "Success message when data is updated successfully"
+  },
+  "successDataInserted": "data successfully inserted",
+  "@successDataInserted": {
+    "description": "Success message when data is inserted successfully"
+  },
+  "errorBadRequest": "Invalid request, please check your input.",
+  "@errorBadRequest": {
+    "description": "Error message for bad request (HTTP 400)"
+  },
+  "errorUnauthorized": "Your session has expired, please login again.",
+  "@errorUnauthorized": {
+    "description": "Error message for unauthorized access (HTTP 401)"
+  },
+  "errorForbidden": "You do not have access to this feature.",
+  "@errorForbidden": {
+    "description": "Error message for forbidden access (HTTP 403)"
+  },
+  "errorNotFound": "The data you are looking for was not found.",
+  "@errorNotFound": {
+    "description": "Error message for not found (HTTP 404)"
+  },
+  "errorValidation": "Some fields are invalid, please check your input.",
+  "@errorValidation": {
+    "description": "Error message for validation errors (HTTP 422) when input data does not meet requirements"
+  },
+  "errorTooManyRequests": "Too many requests, please wait a moment.",
+  "@errorTooManyRequests": {
+    "description": "Error message for too many requests (HTTP 429)"
+  },
+  "errorInternalServer": "A system error occurred, please try again later.",
+  "@errorInternalServer": {
+    "description": "Error message for internal server error (HTTP 500)"
+  },
+  "errorBadGateway": "System is busy, please try again later.",
+  "@errorBadGateway": {
+    "description": "Error message for bad gateway (HTTP 502)"
+  },
+  "errorMaintenance": "Service is under maintenance.",
+  "@errorMaintenance": {
+    "description": "Error message for service maintenance"
+  },
+  "errorGatewayTimeout": "Server connection timed out, please try again.",
+  "@errorGatewayTimeout": {
+    "description": "Error message for gateway timeout (HTTP 504)"
+  },
+  "errorUnknown": "An unknown error occurred.",
+  "@errorUnknown": {
+    "description": "Error message for unknown errors"
+  }
+}
