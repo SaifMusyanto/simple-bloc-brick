@@ -10,3 +10,9 @@ extension MediaQueryContextExtension on BuildContext {
 extension LocalizationExtension on BuildContext {
   AppLocalizations? get appLocalizations => AppLocalizations.of(this);
 }
+
+extension ThemeExtension on BuildContext {
+  ThemeData get theme => Theme.of(this);
+  ColorScheme get colorScheme => theme.colorScheme;
+  TextTheme get textTheme => theme.textTheme;
+}

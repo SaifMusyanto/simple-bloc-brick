@@ -3,7 +3,7 @@ import 'package:fpdart/fpdart.dart';
 import '../error/failures.dart';
 
 abstract class UseCase<T, Params> {
-  Future<Either<Failure, Type>> call(Params params);
+  Future<Either<Failure, T>> call(Params params);
 }
 
 class NoParams extends Equatable {

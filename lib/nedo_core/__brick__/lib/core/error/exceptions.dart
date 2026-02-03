@@ -1,9 +1,21 @@
+import 'package:dio/dio.dart';
+
 enum NetworkErrorType {
   connectTimeout,
   sendTimeout,
   receiveTimeout,
   cancel,
-  other,
+  other;
+
+  static NetworkErrorType fromDioType(DioExceptionType type) {
+    return switch (type) {
+      DioExceptionType.connectionTimeout => NetworkErrorType.connectTimeout,
+      DioExceptionType.sendTimeout => NetworkErrorType.sendTimeout,
+      DioExceptionType.receiveTimeout => NetworkErrorType.receiveTimeout,
+      DioExceptionType.cancel => NetworkErrorType.cancel,
+      _ => NetworkErrorType.other,
+    };
+  }
 }
 
 class NetworkException implements Exception {
@@ -16,6 +28,7 @@ class NetworkException implements Exception {
 class ServerException implements Exception {
   final String message;
   final int? code;
+
   ServerException(this.message, {this.code});
 }
 
@@ -33,3 +46,4 @@ class UnknownException implements Exception {
   final String message;
   UnknownException(this.message);
 }
+
