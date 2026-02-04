@@ -1,0 +1,33 @@
+# ======================
+# Dart / Flutter / Melos
+# ======================
+.dart_tool/
+.packages
+.pub-cache/
+build/
+
+# Melos
+.melos_tool/
+melos_*.log
+
+# Pub
+pubspec.lock
+
+# ======================
+# IDEs
+# ======================
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+
+# ======================
+# OS / Temp
+# ======================
+.DS_Store
+Thumbs.db
+
+.mason/
+hooks/build/
+hooks/.dart_tool

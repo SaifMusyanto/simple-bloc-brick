@@ -1,4 +1,4 @@
-# Advanced BLoC Generator v2.0
+# Nedo BLoC
 
 🚀 **Full-featured BLoC generator with interactive CLI, multiple events, custom states, and repository layer support.**
 
@@ -47,12 +47,36 @@ mason add advanced_bloc --path /path/to/advanced_bloc_brick
 ### Basic Usage (Interactive)
 
 ```bash
-mason make advanced_bloc
+mason add nedo_bloc
 ```
 
 Answer the prompts:
 
+```bash
+mason add nedo_bloc --path C:\Users\ASUS\OneDrive\Documents\Exploration\simple_bloc_brick
 ```
+
+## Usage
+
+### Generate BLoC files
+
+```bash
+mason make nedo_bloc
+```
+
+You'll be prompted for:
+
+1. **Feature name** (e.g., `user`, `product`, `post`)
+2. **Data type** (e.g., `List<User>`, `Product`, `Map<String, dynamic>`)
+3. **Datasource class name** (e.g., `UserDatasource`, `ProductRemoteDatasource`)
+4. **Datasource method name** (e.g., `getUsers`, `fetchProducts`)
+5. **Use Equatable?** (default: `true`)
+
+### Example
+
+```bash
+$ mason make nedo_bloc
+
 ? What is the feature name? user
 ? Generate repository layer? (Y/n) n
 ? What is the data type? (dynamic) List<User>

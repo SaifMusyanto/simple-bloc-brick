@@ -1,7 +1,7 @@
-name: advanced_bloc
-description: Advanced BLoC generator with full CRUD and repository layer automatically.
-version: 2.1.0
-repository: https://github.com/yourusername/advanced_bloc_brick
+name: nedo_bloc
+description: Generate BLoC pattern boilerplate with basic states (Initial, Loading, Loaded, Error) and fetch event
+version: 1.0.0
+repository: https://github.com/SaifMusyanto/nedo_cli
 
 vars:
   # Hanya menanyakan informasi inti
