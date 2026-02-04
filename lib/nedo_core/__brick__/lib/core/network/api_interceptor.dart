@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../services/secure_storage_service.dart';
+import '../services/secure_storage/secure_storage_service.dart';
 
 class ApiInterceptor extends Interceptor {
   final SecureStorageService _secureStorageService;

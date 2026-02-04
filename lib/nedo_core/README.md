@@ -7,6 +7,7 @@ This package provides the core architectural components for Flutter applications
 - **Robust Error Handling**: Standardized flow from Exception to UI-friendly messages.
 - **Functional Programming**: Built-in support for `fpdart` (`Either<Failure, T>`) for safe error handling.
 - **Network Module**: Pre-configured `DioClient` with interceptors, logging, and global error parsing.
+- **Database Module**: Pre-configured `DatabaseService` with `sqflite` for managing local database.
 - **Secure Storage**: Helper wrapper around `flutter_secure_storage` for managing tokens.
 - **Localization**: Ready-to-use localization (ID/EN) for standard error messages.
 
@@ -32,6 +33,7 @@ dependencies:
   intl: ^0.19.0 
   dio: ^5.0.0
   flutter_secure_storage: ^8.0.0
+  sqflite: ^2.4.2
 
 # Required for code generation
 flutter:
@@ -84,7 +86,7 @@ lib/
 │   ├── error/              # Failure (Domain) and Exception (Data) classes.
 │   ├── l10n/               # Localization files (.arb).
 │   ├── network/            # DioClient, Interceptors, and API configurations.
-│   ├── services/           # External services (e.g., SecureStorageService).
+│   ├── services/           # External services (e.g., SecureStorage, Database).
 │   ├── usecase/            # Base UseCase class (forces Either<Failure, T>).
 │   └── extension/          # Helper extensions (e.g., ScreenSize, Localization, Theme).
 l10n.yaml                   # Localization configuration file.

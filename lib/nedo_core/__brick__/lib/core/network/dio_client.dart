@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import '../error/exceptions.dart';
-import '../services/secure_storage_service.dart';
+import '../services/secure_storage/secure_storage_service.dart';
 import 'api_config.dart';
 import 'api_interceptor.dart';
 
