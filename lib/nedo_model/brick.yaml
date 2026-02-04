@@ -1,5 +1,5 @@
-name: nedo_dto
-description: A new brick created with the Mason CLI.
+name: nedo_model
+description: A brick for generating Nedo API models, mappers, entities from a Swagger schema.
 
 # The following defines the brick repository url.
 # Uncomment and update the following line before publishing the brick.
