@@ -8,10 +8,22 @@ Future<void> run(HookContext context) async {
 
   final List<String> targetComponents = [];
 
-  if (rawTarget is List) {
-    targetComponents.addAll(rawTarget.map((e) => e.toString()));
-  } else if (rawTarget is String && rawTarget.isNotEmpty) {
-    targetComponents.add(rawTarget);
+  final Iterable<String> inputs = rawTarget is List
+      ? rawTarget.map((e) => e.toString())
+      : (rawTarget is String && rawTarget.isNotEmpty ? [rawTarget] : const []);
+
+  for (final rawName in inputs) {
+    if (rawName.endsWith('BaseRequest')) {
+      final baseName =
+          rawName.substring(0, rawName.length - 'BaseRequest'.length);
+
+      context.logger.info(
+          "Detected 'BaseRequest' suffix in '$rawName'; resolving to '$baseName'.");
+
+      targetComponents.add(baseName);
+    } else {
+      targetComponents.add(rawName);
+    }
   }
 
   if (!path.startsWith('http')) {
@@ -96,6 +108,7 @@ Future<void> run(HookContext context) async {
         final refName = _getRefName(propData[r'$ref']);
         dartType = refName;
         isCustom = true;
+        innerType = refName;
 
         _addToQueue(refName, processedModels, queue, context);
       } else if (propData['type'] == 'array') {
