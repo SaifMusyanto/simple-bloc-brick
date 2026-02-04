@@ -1,33 +1,54 @@
-name: simple_bloc
-description: Generate BLoC pattern boilerplate with basic states (Initial, Loading, Loaded, Error) and fetch event
-version: 1.0.0
-repository: https://github.com/SaifMusyanto/simple-bloc-brick
+name: advanced_bloc
+description: Advanced BLoC generator with full CRUD and repository layer automatically.
+version: 2.1.0
+repository: https://github.com/yourusername/advanced_bloc_brick
 
-# Variables that will be used in templates
 vars:
+  # Hanya menanyakan informasi inti
   name:
     type: string
-    description: The feature/page name (e.g., user, product, post)
+    description: Feature name (e.g., user, product)
     prompt: What is the feature name?
+    default: feature
 
   data_type:
     type: string
-    description: The data type that will be loaded (e.g., List<User>, Product, Map<String, dynamic>)
+    description: Data type (e.g., List<User>, Product)
     prompt: What is the data type?
     default: dynamic
 
   datasource_name:
     type: string
-    description: The datasource class name (e.g., UserDatasource, ProductRemoteDatasource)
-    prompt: What is the datasource class name?
+    description: Datasource class name
+    prompt: Datasource class name?
+    default: ApiDatasource
 
-  datasource_method:
-    type: string
-    description: The method name to fetch data from datasource (e.g., getUsers, fetchProducts)
-    prompt: What is the datasource fetch method name?
+  use_repository:
+    type: boolean
+    description: Generate repository layer
+    prompt: Generate repository layer?
+    default: true
 
   use_equatable:
     type: boolean
-    description: Whether to use Equatable for states and events
+    description: Use Equatable
     prompt: Use Equatable?
     default: true
+
+  # Method names otomatis (Hidden/Default tanpa prompt jika memungkinkan,
+  # namun di Mason kita set default-nya agar langsung enter tanpa ketik)
+  fetch_method:
+    type: string
+    default: "get{{name.pascalCase()}}s"
+
+  create_method:
+    type: string
+    default: "create{{name.pascalCase()}}"
+
+  update_method:
+    type: string
+    default: "update{{name.pascalCase()}}"
+
+  delete_method:
+    type: string
+    default: "delete{{name.pascalCase()}}"

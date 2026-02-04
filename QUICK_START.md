@@ -1,67 +1,66 @@
-# Simple BLoC - Quick Start Guide
+# Advanced BLoC - Quick Start Guide
+
+Get started with full-featured BLoC generation in 5 minutes!
 
 ## Installation
 
-1. **Install Mason CLI** (if not already installed):
-
 ```bash
+# Install Mason CLI (if not installed)
 dart pub global activate mason_cli
+
+# Add the brick
+mason add advanced_bloc --path /path/to/advanced_bloc_brick
+
+# Verify
+mason list
 ```
 
-2. **Add the brick to your project**:
+## 5-Minute Tutorial
 
-From local path:
+### Scenario: User Management (Full CRUD)
 
-```bash
-cd your_flutter_project
-mason add simple_bloc --path /path/to/simple_bloc_brick
-```
+We'll create a complete user management BLoC with:
 
-Or from git (after publishing):
+- ✅ Fetch users
+- ✅ Create user
+- ✅ Update user
+- ✅ Delete user
+- ✅ Empty state for no users
 
-```bash
-mason add simple_bloc --git-url https://github.com/yourusername/simple_bloc_brick
-```
-
-## Generate Your First BLoC
-
-Navigate to where you want to generate the files:
+#### Step 1: Generate the BLoC (1 minute)
 
 ```bash
 cd lib/features/user/presentation/bloc
+
+mason make advanced_bloc \
+  --name user \
+  --data_type "List<User>" \
+  --datasource_name UserDatasource \
+  --include_fetch \
+  --include_create \
+  --include_update \
+  --include_delete \
+  --include_empty_state \
+  --include_creating_state \
+  --include_deleting_state
 ```
 
-Run the generator:
+**Generated:**
 
-```bash
-mason make simple_bloc
-```
+- ✅ `user_bloc.dart` - Complete BLoC
+- ✅ `user_event.dart` - 4 events
+- ✅ `user_state.dart` - 7 states
 
-Answer the prompts:
-
-```
-? What is the feature name? user
-? What is the data type? List<User>
-? What is the datasource class name? UserDatasource
-? What is the datasource fetch method name? getUsers
-? Use Equatable? Yes
-```
-
-Done! You now have:
-
-- ✅ `user_bloc.dart`
-- ✅ `user_event.dart`
-- ✅ `user_state.dart`
-
-## Create the Datasource
-
-The generated BLoC expects a datasource. Create it:
+#### Step 2: Create the Datasource (2 minutes)
 
 ```dart
 // lib/features/user/data/datasources/user_datasource.dart
 
 abstract class UserDatasource {
   Future<List<User>> getUsers();
+  Future<void> createUser(User data);
+  Future<void> updateUser(User data);
+  Future<void> deleteUser(String id);
 }
 
 class UserDatasourceImpl implements UserDatasource {
@@ -78,126 +77,337 @@ class UserDatasourceImpl implements UserDatasource {
     if (response.statusCode == 200) {
       final List<dynamic> jsonList = json.decode(response.body);
       return jsonList.map((json) => User.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load users');
+    }
+    throw Exception('Failed to load users');
+  }
+
+  @override
+  Future<void> createUser(User data) async {
+    final response = await client.post(
+      Uri.parse('https://api.example.com/users'),
+      body: json.encode(data.toJson()),
+    );
+
+    if (response.statusCode != 201) {
+      throw Exception('Failed to create user');
+    }
+  }
+
+  @override
+  Future<void> updateUser(User data) async {
+    final response = await client.put(
+      Uri.parse('https://api.example.com/users/${data.id}'),
+      body: json.encode(data.toJson()),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update user');
+    }
+  }
+
+  @override
+  Future<void> deleteUser(String id) async {
+    final response = await client.delete(
+      Uri.parse('https://api.example.com/users/$id'),
+    );
+
+    if (response.statusCode != 204) {
+      throw Exception('Failed to delete user');
     }
   }
 }
 ```
 
-## Use in Your App
-
-### 1. Provide the BLoC
+#### Step 3: Use in Your App (2 minutes)
 
 ```dart
-BlocProvider(
-  create: (context) => UserBloc(
-    datasource: UserDatasourceImpl(http.Client()),
-  )..add(const FetchUser()),
-  child: UserPage(),
-)
-```
+// lib/features/user/presentation/pages/user_page.dart
 
-### 2. Build UI based on states
-
-```dart
 class UserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Users')),
-      body: BlocBuilder<UserBloc, UserState>(
-        builder: (context, state) {
-          if (state is UserLoading) {
-            return Center(child: CircularProgressIndicator());
-          }
+    return BlocProvider(
+      create: (context) => UserBloc(
+        datasource: UserDatasourceImpl(http.Client()),
+      )..add(const FetchUser()),
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Users')),
+        body: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            // Loading
+            if (state is UserLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
 
-          if (state is UserLoaded) {
-            return ListView.builder(
-              itemCount: state.data.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(state.data[index].name),
-                );
-              },
-            );
-          }
+            // Creating
+            if (state is UserCreating) {
+              return const Center(child: Text('Creating user...'));
+            }
 
-          if (state is UserError) {
-            return Center(child: Text('Error: ${state.message}'));
-          }
+            // Deleting
+            if (state is UserDeleting) {
+              return const Center(child: Text('Deleting user...'));
+            }
 
-          return Center(child: Text('Press button to load'));
+            // Empty
+            if (state is UserEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.person_off, size: 64),
+                    const SizedBox(height: 16),
+                    const Text('No users found'),
+                    ElevatedButton(
+                      onPressed: () => _showCreateDialog(context),
+                      child: const Text('Add First User'),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            // Loaded
+            if (state is UserLoaded) {
+              return ListView.builder(
+                itemCount: state.data.length,
+                itemBuilder: (context, index) {
+                  final user = state.data[index];
+                  return ListTile(
+                    leading: CircleAvatar(child: Text(user.name[0])),
+                    title: Text(user.name),
+                    subtitle: Text(user.email),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () => _showEditDialog(context, user),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () => context
+                              .read<UserBloc>()
+                              .add(DeleteUser(user.id)),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+
+            // Error
+            if (state is UserError) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.error, size: 64, color: Colors.red),
+                    const SizedBox(height: 16),
+                    Text('Error: ${state.message}'),
+                    ElevatedButton(
+                      onPressed: () => context
+                          .read<UserBloc>()
+                          .add(const FetchUser()),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            return const SizedBox();
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => _showCreateDialog(context),
+          child: const Icon(Icons.add),
+        ),
+      ),
+    );
+  }
+
+  void _showCreateDialog(BuildContext context) {
+    // Show dialog to create new user
+    showDialog(
+      context: context,
+      builder: (_) => CreateUserDialog(
+        onSubmit: (user) {
+          context.read<UserBloc>().add(CreateUser(user));
+          Navigator.pop(context);
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<UserBloc>().add(const FetchUser());
+    );
+  }
+
+  void _showEditDialog(BuildContext context, User user) {
+    // Show dialog to edit user
+    showDialog(
+      context: context,
+      builder: (_) => EditUserDialog(
+        user: user,
+        onSubmit: (updatedUser) {
+          context.read<UserBloc>().add(UpdateUser(updatedUser));
+          Navigator.pop(context);
         },
-        child: Icon(Icons.refresh),
       ),
     );
   }
 }
 ```
 
-## Tips
+## That's It! 🎉
 
-1. **Generate files in the correct location**:
+You now have:
 
-   ```
-   lib/features/[feature]/presentation/bloc/
-   ```
+- ✅ Full CRUD functionality
+- ✅ Loading states for each operation
+- ✅ Empty state handling
+- ✅ Error handling
+- ✅ Auto-refresh after mutations
 
-2. **Create datasource first** (or at least the interface) so you know the method names
+## Common Scenarios
 
-3. **Use dependency injection** for datasource (get_it, provider, etc.)
+### Scenario 1: Simple Read-Only List
 
-4. **Add more events/states** after generation as needed
+```bash
+mason make advanced_bloc \
+  --name post \
+  --data_type "List<Post>" \
+  --datasource_name PostDatasource \
+  --include_fetch \
+  --include_empty_state
+```
 
-5. **Test your BLoC**:
-   ```dart
-   test('emits [Loading, Loaded] when fetch succeeds', () {
-     // arrange
-     when(() => datasource.getUsers()).thenAnswer((_) async => [user]);
+### Scenario 2: With Repository Layer
 
-     // assert
-     expectLater(
-       bloc.stream,
-       emitsInOrder([
-         UserLoading(),
-         UserLoaded([user]),
-       ]),
-     );
+```bash
+mason make advanced_bloc \
+  --name product \
+  --use_repository \
+  --data_type "Product" \
+  --datasource_name ProductDatasource \
+  --include_fetch \
+  --include_update
+```
 
-     // act
-     bloc.add(FetchUser());
-   });
-   ```
+Then create:
+
+```dart
+// Use repository instead of datasource
+BlocProvider(
+  create: (context) => ProductBloc(
+    repository: ProductRepositoryImpl(
+      ProductDatasourceImpl(),
+    ),
+  ),
+  child: ProductPage(),
+)
+```
+
+### Scenario 3: Detail View (Single Item)
+
+```bash
+mason make advanced_bloc \
+  --name user_detail \
+  --data_type "User" \
+  --datasource_name UserDatasource \
+  --include_fetch \
+  --include_update
+```
+
+## Tips & Tricks
+
+### Tip 1: Answer Prompts with Single Letters
+
+```
+? Include fetch event? (Y/n) Y    ← Just "Y"
+? Include create event? (Y/n) n   ← Just "n"
+```
+
+NOT "Yes" or "No"!
+
+### Tip 2: Use Flags for Consistency
+
+Create a script for your team:
+
+```bash
+# scripts/generate_crud_bloc.sh
+#!/bin/bash
+mason make advanced_bloc \
+  --name $1 \
+  --data_type "$2" \
+  --datasource_name "$3" \
+  --include_fetch \
+  --include_create \
+  --include_update \
+  --include_delete \
+  --include_empty_state \
+  --include_creating_state \
+  --include_deleting_state
+```
+
+Use it:
+
+```bash
+./generate_crud_bloc.sh user "List<User>" UserDatasource
+```
+
+### Tip 3: Combine with v1.0 Simple BLoC
+
+```bash
+# For simple cases - use v1.0
+mason make simple_bloc --name notification
+
+# For complex cases - use v2.0
+mason make advanced_bloc --name user
+```
 
 ## Troubleshooting
 
-**Issue**: "Cannot find datasource class"
+**Issue:** Boolean prompts not working
+**Solution:** Answer with `Y` or `n` (single letter), or use command-line flags
 
-- Make sure you've created the datasource class first
-- Check the import statement in the generated bloc file
+**Issue:** Generated files have errors
+**Solution:** The TEMPLATES have "errors" (normal). Check the GENERATED files in your project
 
-**Issue**: "Type mismatch error"
-
-- Verify the data type you specified matches what datasource returns
-- Example: If datasource returns `Future<List<User>>`, specify `List<User>` as data type
-
-**Issue**: "Equatable not found"
-
-- Add to pubspec.yaml: `equatable: ^2.0.0`
-- Or generate without Equatable by answering "No" to the prompt
+**Issue:** Want to add more events later
+**Solution:** Regenerate with more flags, or manually add to the generated files
 
 ## Next Steps
 
-After mastering v1.0, look forward to:
+1. **Read the full README** - See all options
+2. **Check examples** - See real-world usage
+3. **Customize** - Modify generated code as needed
+4. **Share** - Use in your team!
 
-- v2.0: Multiple event types (delete, update, create)
-- v3.0: Repository layer generation
-- v4.0: Complete feature generation (data + domain + presentation)
+## Quick Reference
+
+### All Boolean Flags
+
+```bash
+--include_fetch          # Fetch event
+--include_create         # Create event
+--include_update         # Update event
+--include_delete         # Delete event
+--include_refresh        # Refresh event
+--include_empty_state    # Empty state
+--include_creating_state # Creating state
+--include_updating_state # Updating state
+--include_deleting_state # Deleting state
+--use_repository         # Repository layer
+--use_equatable          # Equatable
+```
+
+### Event Methods
+
+```dart
+context.read<UserBloc>().add(const FetchUser());
+context.read<UserBloc>().add(CreateUser(newUser));
+context.read<UserBloc>().add(UpdateUser(user));
+context.read<UserBloc>().add(DeleteUser('id'));
+context.read<UserBloc>().add(const RefreshUser());
+```
 
 Happy coding! 🚀

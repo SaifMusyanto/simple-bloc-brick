@@ -9,20 +9,77 @@ class {{name.pascalCase()}}Bloc extends Bloc<{{name.pascalCase()}}Event, {{name.
   {{name.pascalCase()}}Bloc({
     required this.datasource,
   }) : super(const {{name.pascalCase()}}Initial()) {
-    on<Fetch{{name.pascalCase()}}>(_onFetch{{name.pascalCase()}});
+    on<{{name.pascalCase()}}Fetched>(_on{{name.pascalCase()}}Fetched);
+    on<{{name.pascalCase()}}Created>(_on{{name.pascalCase()}}Created);
+    on<{{name.pascalCase()}}Updated>(_on{{name.pascalCase()}}Updated);
+    on<{{name.pascalCase()}}Deleted>(_on{{name.pascalCase()}}Deleted);
+    on<{{name.pascalCase()}}Refreshed>(_on{{name.pascalCase()}}Refreshed);
   }
 
-  Future<void> _onFetch{{name.pascalCase()}}(
-    Fetch{{name.pascalCase()}} event,
+  Future<void> _on{{name.pascalCase()}}Fetched(
+    {{name.pascalCase()}}Fetched event,
     Emitter<{{name.pascalCase()}}State> emit,
   ) async {
     emit(const {{name.pascalCase()}}Loading());
-    
     try {
-      final data = await datasource.{{{datasource_method}}}();
-      emit({{name.pascalCase()}}Loaded(data));
+      final data = await datasource.{{{fetch_method}}}();
+      if ((data is List && data.isEmpty)) {
+        emit(const {{name.pascalCase()}}Empty());
+      } else {
+        emit({{name.pascalCase()}}Loaded(data));
+      }
     } catch (e) {
       emit({{name.pascalCase()}}Error(e.toString()));
     }
+  }
+
+  Future<void> _on{{name.pascalCase()}}Created(
+    {{name.pascalCase()}}Created event,
+    Emitter<{{name.pascalCase()}}State> emit,
+  ) async {
+    emit(const {{name.pascalCase()}}Submitting());
+    try {
+      await datasource.{{{create_method}}}(event.item);
+      emit(const {{name.pascalCase()}}Success('Created successfully'));
+      // Optional: Refresh data after success
+      add(const {{name.pascalCase()}}Fetched());
+    } catch (e) {
+      emit({{name.pascalCase()}}Error(e.toString()));
+    }
+  }
+
+  Future<void> _on{{name.pascalCase()}}Updated(
+    {{name.pascalCase()}}Updated event,
+    Emitter<{{name.pascalCase()}}State> emit,
+  ) async {
+    emit(const {{name.pascalCase()}}Submitting());
+    try {
+      await datasource.{{{update_method}}}(event.item);
+      emit(const {{name.pascalCase()}}Success('Updated successfully'));
+      add(const {{name.pascalCase()}}Fetched());
+    } catch (e) {
+      emit({{name.pascalCase()}}Error(e.toString()));
+    }
+  }
+
+  Future<void> _on{{name.pascalCase()}}Deleted(
+    {{name.pascalCase()}}Deleted event,
+    Emitter<{{name.pascalCase()}}State> emit,
+  ) async {
+    emit(const {{name.pascalCase()}}Submitting());
+    try {
+      await datasource.{{{delete_method}}}(event.id);
+      emit(const {{name.pascalCase()}}Success('Deleted successfully'));
+      add(const {{name.pascalCase()}}Fetched());
+    } catch (e) {
+      emit({{name.pascalCase()}}Error(e.toString()));
+    }
+  }
+
+  Future<void> _on{{name.pascalCase()}}Refreshed(
+    {{name.pascalCase()}}Refreshed event,
+    Emitter<{{name.pascalCase()}}State> emit,
+  ) async {
+    add(const {{name.pascalCase()}}Fetched());
   }
 }
